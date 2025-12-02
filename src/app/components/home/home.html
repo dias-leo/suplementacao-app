@@ -1,0 +1,53 @@
+<div class="supp-card" role="region" aria-labelledby="supp-title">
+  <header class="supp-card__header">
+    <div>
+      <h1 id="supp-title">Recomendação de Suplementação</h1>
+      <p class="supp-card__subtitle">Escolha o tipo de exercício para ver recomendações específicas</p>
+    </div>
+    <div class="supp-card__logo" aria-hidden="true">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 13h4v8H3zM17 3h4v18h-4zM10 7h4v14h-4z" fill="currentColor" opacity="0.9"/>
+      </svg>
+    </div>
+  </header>
+
+  <div class="supp-card__body">
+    <label for="exerciseSelect" class="visually-hidden">Selecione o exercício</label>
+    <div class="select-wrapper">
+      <select id="exerciseSelect" [(ngModel)]="selectedExercise" (change)="onSelect()" name="exerciseSelect" aria-label="Tipo de exercício">
+        <option value="">Selecione...</option>
+        <option *ngFor="let ex of exercises" [value]="ex">{{ ex }}</option>
+      </select>
+      <div class="select-decor" aria-hidden="true">▾</div>
+    </div>
+
+    <section class="recommendation" aria-live="polite">
+      <h2 class="recommendation__title">Suplementação Recomendada</h2>
+
+      <ul *ngIf="currentSupplements.length > 0" class="supp-list">
+        <li *ngFor="let sup of currentSupplements" class="supp-list__item">
+          <span class="supp-badge">✓</span>
+          <div class="supp-content">
+            <strong class="supp-name">{{ sup }}</strong>
+            <small class="supp-note">Consulte um especialista antes de iniciar</small>
+          </div>
+        </li>
+      </ul>
+
+      <div *ngIf="currentSupplements.length === 0" class="empty">
+        <div class="empty__art" aria-hidden="true">
+          <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="104" height="56" rx="8" fill="rgba(0,0,0,0.04)"/>
+            <circle cx="60" cy="38" r="12" fill="rgba(0,0,0,0.06)"/>
+            <rect x="48" y="52" width="24" height="6" rx="3" fill="rgba(0,0,0,0.06)"/>
+          </svg>
+        </div>
+        <p class="empty__text">Selecione um exercício para ver recomendações.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer class="supp-card__footer">
+    <small>Informações de caráter informativo — consulte um profissional de saúde.</small>
+  </footer>
+</div>

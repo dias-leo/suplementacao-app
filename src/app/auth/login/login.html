@@ -1,0 +1,72 @@
+<div class="login-page">
+  <div class="login-grid">
+    <aside class="login-visual" aria-hidden="true">
+      <div class="visual-shape">
+        <!-- Ilustração simples (SVG) -->
+        <svg viewBox="0 0 320 220" preserveAspectRatio="xMidYMid meet">
+          <rect x="8" y="20" width="304" height="180" rx="20" fill="rgba(124,58,237,0.08)"/>
+          <circle cx="90" cy="90" r="34" fill="rgba(124,58,237,0.14)"/>
+          <path d="M160 40 q40 30 0 80 q-40 30 -80 0 q-40 -30 0 -80 q40 -30 80 0z" fill="rgba(124,58,237,0.06)"/>
+        </svg>
+      </div>
+      <h3>Bem-vindo</h3>
+      <p class="muted">Entre na sua conta para acessar seu painel e recomendações.</p>
+    </aside>
+
+    <main class="login-card" role="main" aria-labelledby="loginTitle">
+      <header class="login-card__top">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">N</div>
+          <div>
+            <h1 id="loginTitle">Nuuvem Fit</h1>
+            <small class="muted">Recomendações e progresso</small>
+          </div>
+        </div>
+      </header>
+
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form" novalidate>
+        <label class="field">
+          <span class="field__label">Email</span>
+          <div class="input-wrap">
+            <input type="email" name="email" required [(ngModel)]="model.email" placeholder="seu@exemplo.com" aria-label="Email"/>
+            <span class="field-icon" aria-hidden="true">@</span>
+          </div>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Senha</span>
+          <div class="input-wrap">
+            <input [type]="showPassword ? 'text' : 'password'" name="password" required minlength="6" [(ngModel)]="model.password" placeholder="••••••••" aria-label="Senha"/>
+            <button type="button" class="btn-icon" (click)="toggleShow()" aria-pressed="{{showPassword}}">
+              <span *ngIf="!showPassword">👁️</span>
+              <span *ngIf="showPassword">🙈</span>
+            </button>
+          </div>
+        </label>
+
+        <div class="form-row">
+          <label class="checkbox">
+            <input type="checkbox" name="remember" [(ngModel)]="model.remember"/>
+            <span>Manter conectado</span>
+          </label>
+
+          <a class="link muted" href="#" (click)="$event.preventDefault()">Esqueci a senha</a>
+        </div>
+
+        <button class="btn-primary" [disabled]="!loginForm.form.valid" type="submit">
+          Entrar
+        </button>
+
+        <div class="divider"><span>ou</span></div>
+
+        <div class="socials d-flex gap-8 justify-center">
+          <button class="btn-social" type="button" aria-label="Entrar com Google">G</button>
+          <button class="btn-social" type="button" aria-label="Entrar com Facebook">f</button>
+          <button class="btn-social" type="button" aria-label="Entrar com GitHub">GH</button>
+        </div>
+
+        <p class="signup">Ainda não tem conta? <a href="#" (click)="$event.preventDefault()">Crie grátis</a></p>
+      </form>
+    </main>
+  </div>
+</div>
